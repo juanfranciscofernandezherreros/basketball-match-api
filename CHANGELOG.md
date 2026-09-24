@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 - 2026-09-24
+
+- Añade `GET /api/v1/matches` para listar todos los partidos de forma paginada.
+- Soporta parámetros estándar `page`, `size` y `sort`.
+- Usa `projectedAt DESC` como orden por defecto.
+- Devuelve metadatos de página y el documento completo de cada partido sin incluir el point-by-point.
+- Corrige el uso de tipos explícitos en la implementación del servicio según las reglas Java del repositorio.
+
 ## 1.0.0 - 2026-09-24
 
 - Crea la API read-only de partidos sobre MongoDB.
