@@ -50,7 +50,8 @@ class MatchControllerTest {
         var players = new MatchModels.TeamPlayers("A", List.of());
         var quarter = new MatchModels.PointByPointQuarter("m1", "Q1", List.of(), Instant.EPOCH);
 
-        when(matchService.getMatch("m1")).thenReturn(match);
+        when(matchService.getMatchDetail("m1"))
+                .thenReturn(new MatchModels.MatchDetail(match, List.of(quarter)));
         when(matchService.getTeamStats("m1")).thenReturn(List.of(stat));
         when(matchService.getPlayers("m1")).thenReturn(List.of(players));
         when(matchService.getPointByPoint("m1")).thenReturn(List.of(quarter));
@@ -62,7 +63,8 @@ class MatchControllerTest {
         var pointByPointResponse = controller.getPointByPoint("m1");
 
         // then
-        assertThat(matchResponse.matchId()).isEqualTo("m1");
+        assertThat(matchResponse.match().matchId()).isEqualTo("m1");
+        assertThat(matchResponse.pointByPoint()).hasSize(1);
         assertThat(statsResponse).hasSize(1);
         assertThat(playersResponse).hasSize(1);
         assertThat(pointByPointResponse).hasSize(1);
