@@ -15,7 +15,7 @@ public final class MatchMapper {
             return null;
         }
 
-        var response = new MatchDtos.MatchResponse(
+        MatchDtos.MatchResponse response = new MatchDtos.MatchResponse(
                 model.matchId(),
                 fixtureToDto(model.fixture()),
                 resultToDto(model.result()),
@@ -34,7 +34,7 @@ public final class MatchMapper {
             return List.of();
         }
 
-        var response = stats.stream()
+        List<MatchDtos.TeamStatResponse> response = stats.stream()
                 .map(stat -> new MatchDtos.TeamStatResponse(
                         stat.period(),
                         stat.category(),
@@ -55,7 +55,7 @@ public final class MatchMapper {
             return List.of();
         }
 
-        var response = teams.stream()
+        List<MatchDtos.TeamPlayersResponse> response = teams.stream()
                 .map(team -> new MatchDtos.TeamPlayersResponse(
                         team.team(),
                         team.players() == null
@@ -72,7 +72,7 @@ public final class MatchMapper {
             return List.of();
         }
 
-        var response = quarters.stream()
+        List<MatchDtos.PointByPointQuarterResponse> response = quarters.stream()
                 .map(quarter -> new MatchDtos.PointByPointQuarterResponse(
                         quarter.matchId(),
                         quarter.quarter(),
