@@ -110,4 +110,6 @@ public final class MatchModels {
 
     public record PointByPointQuarter(
             String matchId, String quarter, List<PointByPointEvent> events, Instant projectedAt) {}
+
+    public record MatchDetail(Match match, List<PointByPointQuarter> pointByPoint) {}
 }

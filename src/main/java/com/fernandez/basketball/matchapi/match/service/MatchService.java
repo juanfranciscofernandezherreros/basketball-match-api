@@ -9,6 +9,8 @@ public interface MatchService {
 
     Page<MatchModels.Match> searchMatches(Pageable pageable);
 
+    MatchModels.MatchDetail getMatchDetail(String matchId);
+
     MatchModels.Match getMatch(String matchId);
 
     List<MatchModels.TeamStat> getTeamStats(String matchId);

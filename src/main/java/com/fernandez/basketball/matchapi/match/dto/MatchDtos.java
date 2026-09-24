@@ -112,6 +112,10 @@ public final class MatchDtos {
             boolean first,
             boolean last) {}
 
+    public record MatchDetailResponse(
+            MatchResponse match,
+            List<PointByPointQuarterResponse> pointByPoint) {}
+
     public record MatchResponse(
             String matchId,
             FixtureResponse fixture,

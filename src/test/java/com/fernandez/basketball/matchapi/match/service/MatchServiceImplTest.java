@@ -50,6 +50,27 @@ class MatchServiceImplTest {
     }
 
     @Test
+    void get_match_detail_returns_all_sections_ok() {
+        // given
+        var document = matchDocument(List.of(teamPlayers()), List.of(teamStat()));
+        var quarterDocument = new PointByPointQuarterDocument(
+                "m1:Q1", "m1", "Q1", List.of(), Instant.parse("2026-09-24T12:00:00Z"));
+        when(matchRepository.findById("m1")).thenReturn(Optional.of(document));
+        when(pointByPointQuarterRepository.findByMatchIdOrderByQuarterAsc("m1"))
+                .thenReturn(List.of(quarterDocument));
+
+        // when
+        var detail = service.getMatchDetail("m1");
+
+        // then
+        assertThat(detail.match().matchId()).isEqualTo("m1");
+        assertThat(detail.match().players()).hasSize(1);
+        assertThat(detail.match().teamStats()).hasSize(1);
+        assertThat(detail.pointByPoint()).hasSize(1);
+        assertThat(detail.pointByPoint().getFirst().quarter()).isEqualTo("Q1");
+    }
+
+    @Test
     void get_match_existing_ok() {
         // given
         var document = matchDocument(List.of(teamPlayers()), List.of(teamStat()));
