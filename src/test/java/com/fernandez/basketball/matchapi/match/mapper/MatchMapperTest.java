@@ -9,8 +9,30 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 class MatchMapperTest {
+
+    @Test
+    void maps_paginated_matches_ok() {
+        // given
+        var pageable = PageRequest.of(1, 2);
+        var page = new PageImpl<>(List.of(completeMatch()), pageable, 5);
+
+        // when
+        var response = MatchMapper.toPageDto(page);
+
+        // then
+        assertThat(response.content()).hasSize(1);
+        assertThat(response.content().getFirst().matchId()).isEqualTo("m1");
+        assertThat(response.page()).isEqualTo(1);
+        assertThat(response.size()).isEqualTo(2);
+        assertThat(response.totalElements()).isEqualTo(5);
+        assertThat(response.totalPages()).isEqualTo(3);
+        assertThat(response.first()).isFalse();
+        assertThat(response.last()).isFalse();
+    }
 
     @Test
     void maps_complete_match_and_sections_ok() {
