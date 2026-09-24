@@ -35,6 +35,23 @@ class MatchMapperTest {
     }
 
     @Test
+    void maps_full_match_detail_ok() {
+        // given
+        var detail = new MatchModels.MatchDetail(
+                completeMatch(),
+                List.of(new MatchModels.PointByPointQuarter(
+                        "m1", "Q1", List.of(), Instant.parse("2026-09-24T12:00:00Z"))));
+
+        // when
+        var response = MatchMapper.toDetailDto(detail);
+
+        // then
+        assertThat(response.match().matchId()).isEqualTo("m1");
+        assertThat(response.pointByPoint()).hasSize(1);
+        assertThat(response.pointByPoint().getFirst().quarter()).isEqualTo("Q1");
+    }
+
+    @Test
     void maps_complete_match_and_sections_ok() {
         // given
         var match = completeMatch();
