@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0 - 2026-09-24
+
+- Amplía `GET /api/v1/matches/{matchId}` para devolver toda la información del partido en una sola llamada.
+- Incluye fixture, resultado, summary, jugadores, team stats y todo el point-by-point agrupado por cuarto.
+- Mantiene el listado paginado ligero, sin incluir point-by-point en cada fila.
+
 ## 1.1.0 - 2026-09-24
 
 - Añade `GET /api/v1/matches` para listar todos los partidos de forma paginada.
