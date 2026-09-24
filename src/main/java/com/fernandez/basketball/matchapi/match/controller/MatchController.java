@@ -33,9 +33,9 @@ public class MatchController {
     }
 
     @GetMapping("/{matchId}")
-    public MatchDtos.MatchResponse getMatch(@PathVariable String matchId) {
-        var match = matchService.getMatch(matchId);
-        var response = MatchMapper.toDto(match);
+    public MatchDtos.MatchDetailResponse getMatch(@PathVariable String matchId) {
+        var match = matchService.getMatchDetail(matchId);
+        var response = MatchMapper.toDetailDto(match);
 
         return response;
     }
