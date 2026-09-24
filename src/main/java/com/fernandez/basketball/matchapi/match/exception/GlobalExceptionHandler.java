@@ -17,8 +17,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AppException.class)
     public ResponseEntity<MatchDtos.ErrorResponse> handleAppException(
             AppException exception, HttpServletRequest request) {
-        var errorCode = exception.errorCode();
-        var response = new MatchDtos.ErrorResponse(
+        AppErrorCode errorCode = exception.errorCode();
+        MatchDtos.ErrorResponse response = new MatchDtos.ErrorResponse(
                 errorCode.name(),
                 errorCode.message(),
                 Instant.now(),
