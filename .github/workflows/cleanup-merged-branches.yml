@@ -20,7 +20,7 @@ jobs:
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const stale = ['feature/mongodb-match-api'];
+            const stale = ['feature/mongodb-match-api', 'feature/full-match-detail-api'];
 
             async function remove(branch) {
               if (!branch || branch === 'main') return;
