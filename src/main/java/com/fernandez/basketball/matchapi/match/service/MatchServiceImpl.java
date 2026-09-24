@@ -30,6 +30,17 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public MatchModels.MatchDetail getMatchDetail(String matchId) {
+        MatchModels.Match match = getMatch(matchId);
+        List<MatchModels.PointByPointQuarter> pointByPoint =
+                pointByPointQuarterRepository.findByMatchIdOrderByQuarterAsc(matchId).stream()
+                        .map(MatchDocumentMapper::toModel)
+                        .toList();
+
+        return new MatchModels.MatchDetail(match, pointByPoint);
+    }
+
+    @Override
     public MatchModels.Match getMatch(String matchId) {
         com.fernandez.basketball.matchapi.match.document.MatchDocument document = matchRepository
                 .findById(matchId)
