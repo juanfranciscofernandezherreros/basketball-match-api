@@ -29,6 +29,13 @@ public final class MatchMapper {
         return response;
     }
 
+    public static MatchDtos.MatchDetailResponse toDetailDto(MatchModels.MatchDetail detail) {
+        MatchDtos.MatchDetailResponse response = new MatchDtos.MatchDetailResponse(
+                toDto(detail.match()), pointByPointToDto(detail.pointByPoint()));
+
+        return response;
+    }
+
     public static MatchDtos.MatchResponse toDto(MatchModels.Match model) {
         if (model == null) {
             return null;
