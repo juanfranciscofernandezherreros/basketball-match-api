@@ -92,12 +92,14 @@ public final class MatchMapper {
             return null;
         }
 
-        return new MatchDtos.FixtureResponse(
+        MatchDtos.FixtureResponse response = new MatchDtos.FixtureResponse(
                 fixture.country(),
                 fixture.competition(),
                 fixture.eventTime(),
                 fixture.homeTeam(),
                 fixture.awayTeam());
+
+        return response;
     }
 
     private static MatchDtos.ResultResponse resultToDto(MatchModels.Result result) {
@@ -105,7 +107,7 @@ public final class MatchMapper {
             return null;
         }
 
-        return new MatchDtos.ResultResponse(
+        MatchDtos.ResultResponse response = new MatchDtos.ResultResponse(
                 result.sourceEventId(),
                 result.eventTime(),
                 result.homeTeam(),
@@ -116,6 +118,8 @@ public final class MatchMapper {
                 result.awayPeriods(),
                 result.country(),
                 result.competition());
+
+        return response;
     }
 
     private static MatchDtos.SummaryResponse summaryToDto(MatchModels.Summary summary) {
@@ -123,7 +127,7 @@ public final class MatchMapper {
             return null;
         }
 
-        return new MatchDtos.SummaryResponse(
+        MatchDtos.SummaryResponse response = new MatchDtos.SummaryResponse(
                 summary.date(),
                 summary.homeName(),
                 summary.homeImage(),
@@ -143,10 +147,12 @@ public final class MatchMapper {
                 summary.thirdAway(),
                 summary.fourthAway(),
                 summary.extraAway());
+
+        return response;
     }
 
     private static MatchDtos.PlayerResponse playerToDto(MatchModels.Player player) {
-        return new MatchDtos.PlayerResponse(
+        MatchDtos.PlayerResponse response = new MatchDtos.PlayerResponse(
                 player.name(),
                 player.team(),
                 player.pts(),
@@ -170,11 +176,13 @@ public final class MatchMapper {
                 player.blocks(),
                 player.blocksAgainst(),
                 player.tfs());
+
+        return response;
     }
 
     private static MatchDtos.PointByPointEventResponse pointByPointEventToDto(
             MatchModels.PointByPointEvent event) {
-        return new MatchDtos.PointByPointEventResponse(
+        MatchDtos.PointByPointEventResponse response = new MatchDtos.PointByPointEventResponse(
                 event.recordType(),
                 event.quarter(),
                 event.sequence(),
@@ -187,5 +195,7 @@ public final class MatchMapper {
                 event.advantageDirection(),
                 event.homeIsWinning(),
                 event.awayIsWinning());
+
+        return response;
     }
 }
