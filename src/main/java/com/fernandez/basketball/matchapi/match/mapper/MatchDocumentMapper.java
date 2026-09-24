@@ -15,7 +15,7 @@ public final class MatchDocumentMapper {
             return null;
         }
 
-        var model = new MatchModels.Match(
+        MatchModels.Match model = new MatchModels.Match(
                 document.matchId(),
                 document.fixture(),
                 document.result(),
@@ -34,7 +34,7 @@ public final class MatchDocumentMapper {
             return null;
         }
 
-        var model = new MatchModels.PointByPointQuarter(
+        MatchModels.PointByPointQuarter model = new MatchModels.PointByPointQuarter(
                 document.matchId(), document.quarter(), document.events(), document.projectedAt());
 
         return model;
