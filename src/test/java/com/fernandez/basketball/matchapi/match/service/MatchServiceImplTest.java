@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 class MatchServiceImplTest {
 
@@ -26,6 +28,26 @@ class MatchServiceImplTest {
             mock(PointByPointQuarterRepository.class);
     private final MatchServiceImpl service =
             new MatchServiceImpl(matchRepository, pointByPointQuarterRepository);
+
+    @Test
+    void search_matches_paginated_ok() {
+        // given
+        var pageable = PageRequest.of(1, 2);
+        var documents = List.of(matchDocument(List.of(teamPlayers()), List.of(teamStat())));
+        when(matchRepository.findAll(pageable))
+                .thenReturn(new PageImpl<>(documents, pageable, 5));
+
+        // when
+        var result = service.searchMatches(pageable);
+
+        // then
+        assertThat(result.getNumber()).isEqualTo(1);
+        assertThat(result.getSize()).isEqualTo(2);
+        assertThat(result.getTotalElements()).isEqualTo(5);
+        assertThat(result.getContent()).hasSize(1);
+        assertThat(result.getContent().getFirst().matchId()).isEqualTo("m1");
+        verify(matchRepository).findAll(pageable);
+    }
 
     @Test
     void get_match_existing_ok() {

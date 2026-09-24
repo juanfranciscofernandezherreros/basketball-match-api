@@ -4,6 +4,9 @@ import com.fernandez.basketball.matchapi.match.dto.MatchDtos;
 import com.fernandez.basketball.matchapi.match.mapper.MatchMapper;
 import com.fernandez.basketball.matchapi.match.service.MatchService;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,16 @@ public class MatchController {
 
     public MatchController(MatchService matchService) {
         this.matchService = matchService;
+    }
+
+    @GetMapping
+    public MatchDtos.PageResponse<MatchDtos.MatchResponse> searchMatches(
+            @PageableDefault(size = 20, sort = "projectedAt", direction = Sort.Direction.DESC)
+                    Pageable pageable) {
+        var matches = matchService.searchMatches(pageable);
+        var response = MatchMapper.toPageDto(matches);
+
+        return response;
     }
 
     @GetMapping("/{matchId}")

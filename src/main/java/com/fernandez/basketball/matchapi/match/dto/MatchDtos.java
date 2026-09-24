@@ -103,6 +103,15 @@ public final class MatchDtos {
             List<PointByPointEventResponse> events,
             Instant projectedAt) {}
 
+    public record PageResponse<T>(
+            List<T> content,
+            int page,
+            int size,
+            long totalElements,
+            int totalPages,
+            boolean first,
+            boolean last) {}
+
     public record MatchResponse(
             String matchId,
             FixtureResponse fixture,

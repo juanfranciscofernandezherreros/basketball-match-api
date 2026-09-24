@@ -1,6 +1,6 @@
 # basketball-match-api
 
-Current version: **1.0.0**
+Current version: **1.1.0**
 
 API HTTP de solo lectura para la web de partidos de baloncesto.
 
@@ -59,12 +59,36 @@ Frontend
 
 | Método | Endpoint | Uso |
 |---|---|---|
+| GET | `/api/v1/matches?page=0&size=20&sort=projectedAt,desc` | Lista paginada de todos los partidos |
 | GET | `/api/v1/matches/{matchId}` | Documento principal del partido |
 | GET | `/api/v1/matches/{matchId}/stats` | Estadísticas de equipo por periodo |
 | GET | `/api/v1/matches/{matchId}/players` | Jugadores agrupados por equipo |
 | GET | `/api/v1/matches/{matchId}/point-by-point` | Eventos agrupados por cuarto |
 
 La respuesta principal contiene fixture, resultado, summary, jugadores, estadísticas de equipo, número de eventos PBP, secciones disponibles y fecha de proyección. No incluye los eventos PBP completos.
+
+### Paginación
+
+`GET /api/v1/matches` devuelve una página de documentos completos de `matches`:
+
+```json
+{
+  "content": [],
+  "page": 0,
+  "size": 20,
+  "totalElements": 120,
+  "totalPages": 6,
+  "first": true,
+  "last": false
+}
+```
+
+Parámetros estándar:
+- `page`: página base 0.
+- `size`: elementos por página.
+- `sort`: campo y dirección, por ejemplo `projectedAt,desc`.
+
+El orden por defecto es `projectedAt DESC`. El point-by-point completo sigue fuera de esta lista y se consulta con el endpoint específico para evitar respuestas excesivamente grandes.
 
 ## Configuración
 

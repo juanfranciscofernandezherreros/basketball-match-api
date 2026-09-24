@@ -3,11 +3,30 @@ package com.fernandez.basketball.matchapi.match.mapper;
 import com.fernandez.basketball.matchapi.match.dto.MatchDtos;
 import com.fernandez.basketball.matchapi.match.model.MatchModels;
 import java.util.List;
+import org.springframework.data.domain.Page;
 
 public final class MatchMapper {
 
     private MatchMapper() {
         throw new UnsupportedOperationException("This class should never be instantiated");
+    }
+
+    public static MatchDtos.PageResponse<MatchDtos.MatchResponse> toPageDto(
+            Page<MatchModels.Match> page) {
+        List<MatchDtos.MatchResponse> content = page.getContent().stream()
+                .map(MatchMapper::toDto)
+                .toList();
+
+        MatchDtos.PageResponse<MatchDtos.MatchResponse> response = new MatchDtos.PageResponse<>(
+                content,
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements(),
+                page.getTotalPages(),
+                page.isFirst(),
+                page.isLast());
+
+        return response;
     }
 
     public static MatchDtos.MatchResponse toDto(MatchModels.Match model) {

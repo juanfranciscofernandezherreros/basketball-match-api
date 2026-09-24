@@ -7,6 +7,8 @@ import com.fernandez.basketball.matchapi.match.model.MatchModels;
 import com.fernandez.basketball.matchapi.match.repository.MatchRepository;
 import com.fernandez.basketball.matchapi.match.repository.PointByPointQuarterRepository;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +22,11 @@ public class MatchServiceImpl implements MatchService {
             PointByPointQuarterRepository pointByPointQuarterRepository) {
         this.matchRepository = matchRepository;
         this.pointByPointQuarterRepository = pointByPointQuarterRepository;
+    }
+
+    @Override
+    public Page<MatchModels.Match> searchMatches(Pageable pageable) {
+        return matchRepository.findAll(pageable).map(MatchDocumentMapper::toModel);
     }
 
     @Override
@@ -40,7 +47,7 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public List<MatchModels.TeamPlayers> getPlayers(String matchId) {
-        var match = getMatch(matchId);
+        MatchModels.Match match = getMatch(matchId);
 
         return match.players() == null ? List.of() : match.players();
     }
