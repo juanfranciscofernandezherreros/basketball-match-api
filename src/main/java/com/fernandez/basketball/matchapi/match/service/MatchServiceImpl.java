@@ -24,7 +24,7 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public MatchModels.Match getMatch(String matchId) {
-        var document = matchRepository
+        com.fernandez.basketball.matchapi.match.document.MatchDocument document = matchRepository
                 .findById(matchId)
                 .orElseThrow(() -> new AppException(AppErrorCode.MATCH_NOT_FOUND));
 
@@ -33,7 +33,7 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public List<MatchModels.TeamStat> getTeamStats(String matchId) {
-        var match = getMatch(matchId);
+        MatchModels.Match match = getMatch(matchId);
 
         return match.teamStats() == null ? List.of() : match.teamStats();
     }
