@@ -10,11 +10,35 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 class MatchControllerTest {
 
     private final MatchService matchService = mock(MatchService.class);
     private final MatchController controller = new MatchController(matchService);
+
+    @Test
+    void delegates_paginated_search_ok() {
+        // given
+        var pageable = PageRequest.of(0, 20);
+        var match = new MatchModels.Match(
+                "m1", null, null, null, List.of(), List.of(), 0, Set.of(), Instant.EPOCH);
+        when(matchService.searchMatches(pageable))
+                .thenReturn(new PageImpl<>(List.of(match), pageable, 1));
+
+        // when
+        var response = controller.searchMatches(pageable);
+
+        // then
+        assertThat(response.content()).hasSize(1);
+        assertThat(response.content().getFirst().matchId()).isEqualTo("m1");
+        assertThat(response.page()).isZero();
+        assertThat(response.size()).isEqualTo(20);
+        assertThat(response.totalElements()).isEqualTo(1);
+        assertThat(response.first()).isTrue();
+        assertThat(response.last()).isTrue();
+    }
 
     @Test
     void delegates_all_read_endpoints_ok() {
