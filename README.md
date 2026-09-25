@@ -1,6 +1,6 @@
 # basketball-match-api
 
-Current version: **1.2.0**
+Current version: **1.2.1**
 
 API HTTP de solo lectura para la web de partidos de baloncesto.
 

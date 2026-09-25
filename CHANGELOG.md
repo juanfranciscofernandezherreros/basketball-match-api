@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1 - 2026-09-25
+
+- [patch] Añade eliminación automática de la rama origen después de mergear una Pull Request en `main`.
+
 ## 1.2.0 - 2026-09-24
 
 - Amplía `GET /api/v1/matches/{matchId}` para devolver toda la información del partido en una sola llamada.
