@@ -30,10 +30,10 @@ Every change must follow this workflow:
 8. Open or update a Pull Request to the default branch.
 9. Check required CI on the current PR SHA.
 10. Fix failures in the same branch/PR and re-run checks automatically.
-11. Merge only when all required/applicable checks are green on the current SHA and no GitHub protection blocks the merge.
+11. When all required/applicable checks are green on the current SHA and no GitHub protection blocks the merge, automatically merge the Pull Request without asking for additional authorization.
 12. Delete only the PR source branch after merge and verify that it no longer exists.
 
-Work is not complete until merge and branch cleanup are complete.
+Work is not complete until the Pull Request is merged and source-branch cleanup has been verified.
 
 ## Canonical rules
 
