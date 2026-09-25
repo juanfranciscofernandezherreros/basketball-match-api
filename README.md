@@ -1,6 +1,6 @@
 # basketball-match-api
 
-![version](https://img.shields.io/badge/version-1.2.1-blue)
+![version](https://img.shields.io/badge/version-1.2.2-blue)
 API HTTP de solo lectura para la web de partidos de baloncesto.
 
 ```text
