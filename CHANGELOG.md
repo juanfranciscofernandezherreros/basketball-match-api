@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2 - 2026-09-25
+
+- [patch] Harden AGENTS.md with mandatory per-task pre-flight, autonomous execution, and an absolute ban on direct default-branch writes.
+
 ## 1.2.1 - 2026-09-25
 
 - [patch] Añade eliminación automática de la rama origen después de mergear una Pull Request en `main`.
